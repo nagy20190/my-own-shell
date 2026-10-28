@@ -16,7 +16,7 @@ class Program
             {
                 Console.WriteLine(commond[5..]);
             }
-            else if(commond.Equals(typeCommond) && commonds.Contains(commond))
+            else if(commond.StartsWith(typeCommond) && commonds.Contains(commond))
             {
                 Console.WriteLine($"{commond} is a shell builtin");
             }
