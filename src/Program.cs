@@ -3,33 +3,34 @@ class Program
     static void Main()
     {
         // TODO: Uncomment the code below to pass the first stage
-        string isExistCommond = "exit";
-        string typeCommond = "type";
-        HashSet<string> commonds = [isExistCommond, typeCommond];
+        string isExist = "exit";
+        string type = "type";
+        string echo = "echo";
+        HashSet<string> commonds = [isExist, type, echo];
         while (true)
         {
             Console.Write("$ ");
-            string commond = Console.ReadLine();
-            if (commond.Equals(isExistCommond)) break;
+            string command = Console.ReadLine()!;
+            if (commonds.Contains(command))
+            {
+                if (command.Equals(isExist)) break;
 
-            if (commond.StartsWith("echo"))
-            {
-                Console.WriteLine(commond[5..]);
-            }
-            else if(commond.StartsWith(typeCommond))
-            {
-                if (commonds.Contains(commond[5..]))
+                if (command.StartsWith("echo"))
                 {
-                    Console.WriteLine($"{commond[5..]} is a shell builtin");
+                    Console.WriteLine(command[5..]);
+                }
+                else if (command.StartsWith(type))
+                {
+                   Console.WriteLine($"{command[5..]} is a shell builtin");                  
                 }
                 else
                 {
-                    Console.WriteLine($"{commond}: not found");
+                    Console.WriteLine($"{command[5..]}: not found");
                 }
             }
             else
             {
-                Console.WriteLine($"{commond}: command not found");
+                Console.WriteLine($"{command}: command not found");
             }
         }
 
