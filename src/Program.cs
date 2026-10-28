@@ -18,7 +18,7 @@ class Program
             }
             else if(commond.StartsWith(typeCommond))
             {
-                Console.WriteLine($"{commond} is a shell builtin");
+                Console.WriteLine($"{commond[..5]} is a shell builtin");
             }
             else
             {
