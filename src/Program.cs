@@ -40,11 +40,13 @@ class Program
                                                                     UnixFileMode.UserExecute |
                                                                     UnixFileMode.OtherExecute))
                         {
-                            Console.WriteLine($"{args} is {fullPath}");
-                            return;
+                            Console.WriteLine($"{args} is {fullPath}");                           
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{args}: not found");
                         }
                     }
-                    Console.WriteLine($"{args}: not found");
                 }
                 else
                 {
