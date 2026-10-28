@@ -31,6 +31,7 @@ class Program
                 else if(command.StartsWith(type))
                 {
                     var args = command[5..];
+                    bool isCommoandFound = false;
                     
                     foreach (string binaryPath in binaryPaths)
                     {
@@ -40,12 +41,13 @@ class Program
                                                                     UnixFileMode.UserExecute |
                                                                     UnixFileMode.OtherExecute))
                         {
-                            Console.WriteLine($"{args} is {fullPath}");                           
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{args}: not found");
-                        }
+                            isCommoandFound = true;
+                            Console.WriteLine($"{args} is {fullPath}");
+                        }                        
+                    }
+                    if(!isCommoandFound)
+                    {
+                        Console.WriteLine($"{args}: not found");
                     }
                 }
                 else
