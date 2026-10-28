@@ -16,15 +16,17 @@ class Program
             {
                 Console.WriteLine(commond[5..]);
             }
-            else if(commond.StartsWith(typeCommond) && commonds.Contains(commond))
+            else if(commond.StartsWith(typeCommond))
             {
-                Console.WriteLine($"{commond} is a shell builtin");
+                if (commonds.Contains(commond[..5]))
+                {
+                    Console.WriteLine($"{commond} is a shell builtin");
+                }
             }
             else
             {
                 Console.WriteLine($"{commond}: command not found");
             }
-
         }
 
     }
