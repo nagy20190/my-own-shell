@@ -11,7 +11,7 @@ class Program
         {
             Console.Write("$ ");
             string command = Console.ReadLine()!;
-            if (commonds.Contains(command))
+            if (commonds.Any(command.Contains))
             {
                 if (command.Equals(isExist)) break;
 
