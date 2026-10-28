@@ -6,12 +6,13 @@ class Program
         string isExist = "exit";
         string type = "type";
         string echo = "echo";
-        HashSet<string> commonds = [isExist, type, echo];
+        HashSet<string> commands = [isExist, type, echo];
         while (true)
         {
             Console.Write("$ ");
             string command = Console.ReadLine()!;
-            if (commonds.Any(command.Contains))
+
+            if (commands.Any(command.Contains))
             {
                 if (command.Equals(isExist)) break;
 
@@ -19,7 +20,7 @@ class Program
                 {
                     Console.WriteLine(command[5..]);
                 }
-                else if (command.StartsWith(type))
+                else if (command.StartsWith(type) && commands.Any(command[5..].Contains))
                 {
                    Console.WriteLine($"{command[5..]} is a shell builtin");                  
                 }
