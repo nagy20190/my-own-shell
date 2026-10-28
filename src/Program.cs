@@ -9,6 +9,12 @@ class Program
             Console.Write("$ ");
             string commond = Console.ReadLine();
             if (commond.Equals(isExist)) break;
+
+            if (commond.StartsWith("echo"))
+            {
+                Console.WriteLine(commond[5..]);
+            }
+
             Console.WriteLine($"{commond}: command not found");
         }
 
