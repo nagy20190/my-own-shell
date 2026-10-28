@@ -43,7 +43,6 @@ class Program
                             //return;
                         }
                     }
-                    Console.WriteLine($"{args}: not found");
                 }
                 else
                 {
