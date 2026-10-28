@@ -14,8 +14,11 @@ class Program
             {
                 Console.WriteLine(commond[5..]);
             }
+            else
+            {
+                Console.WriteLine($"{commond}: command not found");
+            }
 
-            Console.WriteLine($"{commond}: command not found");
         }
 
     }
