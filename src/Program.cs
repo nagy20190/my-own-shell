@@ -40,7 +40,7 @@ class Program
                                                                    UnixFileMode.OtherExecute))
                         {
                             Console.WriteLine($"{args} is {fullPath}");
-                            return;
+                            //return;
                         }
                     }
                     Console.WriteLine($"{args}: not found");
