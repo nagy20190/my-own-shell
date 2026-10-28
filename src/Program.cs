@@ -31,18 +31,20 @@ class Program
                 else if(command.StartsWith(type))
                 {
                     var args = command[5..];
+                    
                     foreach (string binaryPath in binaryPaths)
                     {
                         string fullPath = Path.Combine(binaryPath, args);
                         if (File.Exists(fullPath) &&
                             File.GetUnixFileMode(fullPath).HasFlag(UnixFileMode.GroupExecute |
-                                                                   UnixFileMode.UserExecute |
-                                                                   UnixFileMode.OtherExecute))
+                                                                    UnixFileMode.UserExecute |
+                                                                    UnixFileMode.OtherExecute))
                         {
                             Console.WriteLine($"{args} is {fullPath}");
-                            //return;
+                            return;
                         }
                     }
+                    Console.WriteLine($"{args}: not found");
                 }
                 else
                 {
