@@ -1,15 +1,53 @@
 class Program
 {
+    
+    public static string isExist = "exit";
+    public static string type = "type";
+    public static string echo = "echo";
+    public static HashSet<string> builtinCommands = [isExist, type, echo];
+    public static string[] binaryPaths =
+   Environment.GetEnvironmentVariable("PATH")?.Split(':') ?? [];
+
+    public static void Echo(string command)
+    {
+        string printWords = command[5..]; // slice all words after index 5, after echo
+        Console.WriteLine(printWords);
+    }
+
+    public static void Type(string command)
+    {
+        if (command.StartsWith(type) && builtinCommands.Any(command[5..].Contains))
+        {
+            Console.WriteLine($"{command[5..]} is a shell builtin");
+        }
+        else if (command.StartsWith(type))
+        {
+            var args = command[5..];
+            bool isCommoandFound = false;
+
+            foreach (string binaryPath in binaryPaths)
+            {
+                string fullPath = Path.Combine(binaryPath, args);
+                if (File.Exists(fullPath) &&
+                    File.GetUnixFileMode(fullPath).HasFlag(UnixFileMode.GroupExecute |
+                                                            UnixFileMode.UserExecute |
+                                                            UnixFileMode.OtherExecute))
+                {
+                    isCommoandFound = true;
+                    Console.WriteLine($"{args} is {fullPath}");
+                }
+            }
+            if (!isCommoandFound)
+            {
+                Console.WriteLine($"{args}: not found");
+            }
+        }
+    }
+
     static void Main()
     {
         // TODO: Uncomment the code below to pass the first stage
-        string isExist = "exit";
-        string type = "type";
-        string echo = "echo";
-        HashSet<string> builtinCommands = [isExist, type, echo];
-        string[] binaryPaths =
-       Environment.GetEnvironmentVariable("PATH")?.Split(':') ?? [];
-
+       
         while (true)
         {
             Console.Write("$ ");
@@ -21,34 +59,11 @@ class Program
 
                 if (command.StartsWith(echo))
                 {
-                    string printWords = command[5..]; // slice all words after index 5, after echo
-                    Console.WriteLine(printWords);
+                    Echo(command);
                 }
-                else if (command.StartsWith(type) && builtinCommands.Any(command[5..].Contains))
+                else if (command.StartsWith(type))
                 {
-                   Console.WriteLine($"{command[5..]} is a shell builtin");                  
-                }
-                else if(command.StartsWith(type))
-                {
-                    var args = command[5..];
-                    bool isCommoandFound = false;
-                    
-                    foreach (string binaryPath in binaryPaths)
-                    {
-                        string fullPath = Path.Combine(binaryPath, args);
-                        if (File.Exists(fullPath) &&
-                            File.GetUnixFileMode(fullPath).HasFlag(UnixFileMode.GroupExecute |
-                                                                    UnixFileMode.UserExecute |
-                                                                    UnixFileMode.OtherExecute))
-                        {
-                            isCommoandFound = true;
-                            Console.WriteLine($"{args} is {fullPath}");
-                        }                        
-                    }
-                    if(!isCommoandFound)
-                    {
-                        Console.WriteLine($"{args}: not found");
-                    }
+                    Type(command);
                 }
                 else
                 {
